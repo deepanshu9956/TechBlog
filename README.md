@@ -1,5 +1,5 @@
 # TechBlog
-It's a blogging website where user can share &amp; explore their interest on a particular technical topics like programming languages, web technologies etc.
+It's a blogging website where user can share &amp; explore their interest on a particular technical topics like programming languages, web technologies etc. Users can Register , login , add posts , edit profile and like the interesting posts. 
 
 Home Page( Showing Login, Register buttons with top 6 most liked blog)
 <img width="1440" alt="Screenshot 2022-05-22 at 10 43 41 PM" src="https://user-images.githubusercontent.com/68969703/169707297-4411368e-cdae-4bf2-babe-ab54a8a7b4a9.png">
