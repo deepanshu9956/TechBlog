@@ -1,6 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*" %>
 <%@ page import="com.tech.blog.helper.ConnectionProvider" %>
+<%@ page import="com.tech.blog.dao.postdao" %>
+<%@ page import="com.tech.blog.entitites.Post" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.tech.blog.dao.likedao" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,63 +35,36 @@
 </div>
 <br>
  <div class="container mainclass">
-    <div class="row mb-2">
-        <div class="col-md-4">
-            <div class="card" >
+    <div class="row">
+        <%
+            postdao p=new postdao(ConnectionProvider.getconnection());
+//            int cid=Integer.parseInt(request.getParameter("cid"));
+            List<Post> posts=null;
+            posts=p.getmaxlikedpost();
+
+            for(Post post :posts){
+        %>
+        <div class="col-md-4 mb-4" >
+            <div class="card" style="height: 15rem;" >
+<%--                <img class="card-img-top" width="100px" height="300px" src="Img/<%= post.getPpic()%>" alt="Card image cap">*/--%>
                 <div class="card-body list-group-item-dark">
-                    <h5 class="card-title">Java Programming</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn primary_background text-white">Read More</a>
+                    <b><%=post.getPtitle()%></b>
+                    <p><%=post.getPcontent()%></p>
+
+                </div>
+                <div class="card-footer text-center primary_background">
+                    <%
+                        likedao dao=new likedao(ConnectionProvider.getconnection());
+
+                    %>
+                    <a href="show_blog_page.jsp?post_id=<%=post.getPid()%>" class="btn btn-outline-light btn-sm">Read More</a>
+
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card" >
-                <div class="card-body list-group-item-dark">
-                    <h5 class="card-title">Java Programming</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn primary_background text-white">Read More</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card" >
-                <div class="card-body list-group-item-dark">
-                    <h5 class="card-title">Java Programming</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn primary_background text-white">Read More</a>
-                </div>
-            </div>
-        </div>
-    </div>
-     <div class="row">
-         <div class="col-md-4">
-             <div class="card" >
-                 <div class="card-body list-group-item-dark">
-                     <h5 class="card-title">Java Programming</h5>
-                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                     <a href="#" class="btn primary_background text-white">Read More</a>
-                 </div>
-             </div>
-         </div>
-         <div class="col-md-4">
-             <div class="card" >
-                 <div class="card-body list-group-item-dark">
-                     <h5 class="card-title">Java Programming</h5>
-                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                     <a href="#" class="btn primary_background text-white">Read More</a>
-                 </div>
-             </div>
-         </div>
-         <div class="col-md-4">
-             <div class="card" >
-                 <div class="card-body list-group-item-dark">
-                     <h5 class="card-title">Java Programming</h5>
-                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                     <a href="#" class="btn primary_background text-white">Read More</a>
-                 </div>
-             </div>
-         </div>
+        <%
+            }
+        %>
      </div>
  </div>
 

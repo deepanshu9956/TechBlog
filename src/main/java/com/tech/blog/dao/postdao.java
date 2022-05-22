@@ -134,4 +134,22 @@ public class postdao {
         }
         return post;
     }
+
+    public List<Post> getmaxlikedpost(){
+        List<Post> list=new ArrayList<>();
+
+        try{
+            String q="select posts.pid from posts inner join liked on posts.pid=liked.pid group by posts.pid order by count(liked.uid) desc Limit 6;";
+            Statement st=this.con.createStatement();
+            ResultSet set=st.executeQuery(q);
+            while(set.next()){
+                Post post=getpostbypid(set.getInt("pid"));
+                list.add(post);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
+    }
 }
